@@ -22,7 +22,9 @@
 		}
 	
 		// Handle case when target is a string or something( possible in deep copy )
-		if( typeof target !== "object" && !typeof target === 'function' )
+		//if( typeof target !== "object" && !typeof target === 'function' )
+        // invalid operator precedence should be:
+        if( typeof target !== "object" && typeof target !== 'function' )
 		{
 			target = {};
 		}
@@ -219,11 +221,15 @@
 		paused: false,
 		
 		init: function( options ) {
-			
+
+
+
 			// Don't do anything if there's no touch support
-			if( ! 'ontouchstart' in document.documentElement )
-				return;
-				
+			//if( ! 'ontouchstart' in document.documentElement )
+			//	return;
+            // invalid operator precedence should be:
+            if (!('ontouchstart' in document.documentElement)) return;
+
 	
 			// Merge default options and specified options
 			options = options || {};
