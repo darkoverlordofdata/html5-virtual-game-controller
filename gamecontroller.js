@@ -6,6 +6,7 @@
 	var __hasProp = {}.hasOwnProperty;
 	var __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 	/* $.extend functionality */
+	/* $.extend functionality */
 	function extend( target, src )
 	{
 		var options, name, copy, copyIsArray, clone,
@@ -808,7 +809,8 @@
 				this.renderAreas();
 			}
 
-			window.requestAnimationFrame( this.renderWrapper );
+            this.ready = true;
+			//window.requestAnimationFrame( this.renderWrapper );
 		},
 		/**
 		 * So we can keep scope, and don't have to create a new obj every requestAnimationFrame (bad for garbage collection) 
@@ -1277,33 +1279,34 @@
 		return TouchableCircle;
 	} )( TouchableArea );
 	
-	/**
-	 * Shim for requestAnimationFrame 
-	 */
-	( function() {
-	  if (typeof module !== "undefined") return
-		var lastTime = 0;
-		var vendors = ['ms', 'moz', 'webkit', 'o'];
-		for( var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x )
-		{
-			window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-			window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] 
-										 || window[vendors[x]+'CancelRequestAnimationFrame'];
-		}
-	 
-		if ( !window.requestAnimationFrame )
-			window.requestAnimationFrame = function( callback, element ) {
-				var currTime = new Date().getTime();
-				var timeToCall = Math.max( 0, 16 - ( currTime - lastTime ) );
-				var id = window.setTimeout( function() { callback(currTime + timeToCall); }, 
-					timeToCall );
-				lastTime = currTime + timeToCall;
-				return id;
-			};
-	 
-		if ( !window.cancelAnimationFrame )
-			window.cancelAnimationFrame = function( id ) {
-				clearTimeout( id );
-			};
-	}() );
+	///**
+	// * Shim for requestAnimationFrame
+	// */
+	//( function() {
+	//  if (typeof module !== "undefined") return
+    //
+	//	var lastTime = 0;
+	//	var vendors = ['ms', 'moz', 'webkit', 'o'];
+	//	for( var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x )
+	//	{
+	//		window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+	//		window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+	//									 || window[vendors[x]+'CancelRequestAnimationFrame'];
+	//	}
+    //
+	//	if ( !window.requestAnimationFrame )
+	//		window.requestAnimationFrame = function( callback, element ) {
+	//			var currTime = new Date().getTime();
+	//			var timeToCall = Math.max( 0, 16 - ( currTime - lastTime ) );
+	//			var id = window.setTimeout( function() { callback(currTime + timeToCall); },
+	//				timeToCall );
+	//			lastTime = currTime + timeToCall;
+	//			return id;
+	//		};
+	//
+	//	if ( !window.cancelAnimationFrame )
+	//		window.cancelAnimationFrame = function( id ) {
+	//			clearTimeout( id );
+	//		};
+	//}() );
 } )(typeof module !== "undefined" ? module.exports : window)
